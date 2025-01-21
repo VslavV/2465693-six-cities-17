@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, NameSpace } from '../../const';
 import { AuthSlice } from '../../types/state';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
+import { toast } from 'react-toastify';
 
 const initialState: AuthSlice = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -27,6 +28,7 @@ export const authSlice = createSlice({
       })
       .addCase(loginAction.rejected, (state)=> {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        toast.error('Ошибка аутентификации');
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;

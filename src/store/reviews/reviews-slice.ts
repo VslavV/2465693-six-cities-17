@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { ReviewsSlice } from '../../types/state';
 import { fetchReviewsAction, postReviewAction } from '../api-actions';
+import { toast } from 'react-toastify';
 
 const initialState: ReviewsSlice = {
   reviews: [],
@@ -24,6 +25,7 @@ export const reviewsSlice = createSlice({
       })
       .addCase(fetchReviewsAction.rejected, (state) => {
         state.isReviewsLoading = false;
+        toast.error('Ошибка загрузки комментариев');
       })
       .addCase(postReviewAction.pending, (state) => {
         state.isReviewPosting = true;
@@ -34,6 +36,7 @@ export const reviewsSlice = createSlice({
       })
       .addCase(postReviewAction.rejected, (state) => {
         state.isReviewPosting = false;
+        toast.error('Ошибка отправки комментария');
       });
   }
 });
