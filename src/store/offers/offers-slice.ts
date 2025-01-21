@@ -1,7 +1,8 @@
 import { NameSpace } from '../../const';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchNearbyAction, fetchOfferAction, fetchOffersAction } from '../api-actions';
+import { changeFavoriteStatusAction, fetchNearbyAction, fetchOfferAction, fetchOffersAction } from '../api-actions';
 import { OffersSlice } from '../../types/state';
+import { changeFavoriteInState } from '../../utils';
 
 const initialState: OffersSlice = {
   offers: [],
@@ -47,6 +48,13 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchNearbyAction.rejected, (state) => {
         state.isNearbyLoading = false;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        if (state.chosenOffer && state.chosenOffer.id === action.payload.id) {
+          state.chosenOffer.isFavorite = action.payload.isFavorite;
+        }
+        state.offers = changeFavoriteInState(action.payload, state.offers);
+        state.nearPlaces = changeFavoriteInState(action.payload, state.nearPlaces);
       });
   },
 });

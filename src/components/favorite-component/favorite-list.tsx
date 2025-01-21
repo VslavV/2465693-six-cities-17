@@ -1,6 +1,11 @@
-import OfferCard from '../offer-card/offer-card';
-import { RentalOffer } from '../../types/offer';
 import FavoriteEmpty from './favorite-empty';
+import OfferCard from '../offer-card/offer-card';
+import { memo } from 'react';
+import { RoutePath } from '../../const';
+import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { RentalOffer } from '../../types/offer';
+import { setCity } from '../../store/app/app-slice';
 import { getOfferFavoriteGroup } from '../../group-favorites';
 
 type FavoriteListProps = {
@@ -9,6 +14,7 @@ type FavoriteListProps = {
 
 function FavoriteList({offers}: FavoriteListProps): JSX.Element {
   const offerFavoriteGroup = getOfferFavoriteGroup({ offers });
+  const dispatch = useAppDispatch();
   if (!offers.length) {
     return <FavoriteEmpty/>;
   }
@@ -19,10 +25,9 @@ function FavoriteList({offers}: FavoriteListProps): JSX.Element {
         <li className="favorites__locations-items" key={city}>
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
-              {/* При нажатии (cобытие onClick) будет срабатывать логика смены фильтра списка по городу. */}
-              <a className="locations__item-link" >
+              <Link className="locations__item-link" to={RoutePath.Index} onClick={()=>dispatch(setCity(city))}>
                 <span>{city}</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="favorites__places">
@@ -36,4 +41,4 @@ function FavoriteList({offers}: FavoriteListProps): JSX.Element {
   );
 }
 
-export default FavoriteList;
+export default memo(FavoriteList);

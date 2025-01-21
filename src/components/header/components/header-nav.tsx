@@ -28,7 +28,7 @@ function HeaderNav (): JSX.Element {
               <span className="header__user-name user__name">
                 {userInfo?.email}
               </span>
-              {userInfo && (favoritesCount > 0 && <span className="header__favorite-count">{favoritesCount}</span>)}
+              {userInfo && <span className="header__favorite-count">{favoritesCount}</span>}
             </Link>
             :
             <Link

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import FavoriteList from '../../components/favorite-component/favorite-list';
 import { useAppSelector } from '../../hooks';
 import { selectFavorites } from '../../store/favorites/favorite-selector';
+import { memo } from 'react';
 
 function FavoritesPage(): JSX.Element {
   const offers = useAppSelector(selectFavorites);
@@ -31,4 +32,4 @@ function FavoritesPage(): JSX.Element {
   );
 }
 
-export default FavoritesPage;
+export default memo(FavoritesPage);

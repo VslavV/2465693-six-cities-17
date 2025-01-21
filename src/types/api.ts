@@ -6,3 +6,8 @@ export type ThunkType = {
   state: AppState;
   extra: AxiosInstance;
 }
+
+export type ChangeFavoriteStatusType = {
+  status: number;
+  offerId: string;
+}

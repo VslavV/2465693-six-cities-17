@@ -1,5 +1,5 @@
 import { ONE_STAR_RATING, SortOption } from './const';
-import { RentalOffer } from './types/offer';
+import { RentalOffer, SelectedRentalOffer } from './types/offer';
 import { OfferReview } from './types/review';
 import { LOCATIONS } from './const';
 
@@ -46,4 +46,16 @@ const getSortedOfferCards = (offers: RentalOffer[], currentSort: SortOption) =>{
 //получаем случайный город
 const getRandomCity = ():string=> LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
 
-export { capitalizeLetter, getRatingWidth, getDateFormat, sortToDate, getSortedOfferCards, getRandomCity };
+const changeFavoriteInState = (updateOffer:RentalOffer|SelectedRentalOffer, offers:RentalOffer[]):RentalOffer[] => {
+  const {id, isFavorite} = updateOffer;
+  offers.find((offer, index) => {
+    if (offer.id === id) {
+      const changedOffer = {...offer, isFavorite: isFavorite};
+      const changedOffers = offers.splice(index, 1, changedOffer);
+      return changedOffers;
+    }
+  });
+  return offers;
+};
+
+export { capitalizeLetter, getRatingWidth, getDateFormat, sortToDate, getSortedOfferCards, getRandomCity, changeFavoriteInState };
