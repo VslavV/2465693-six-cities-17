@@ -5,15 +5,17 @@ import { selectAuthorizationStatus } from '../../store/auth/auth-selector';
 
 type PrivateRouteProps = {
   children: JSX.Element;
+  redirectTo: RoutePath;
+  authStatus: AuthorizationStatus;
 }
 
-//компонент в который помещается компонент, который хотим защитить
-function PrivateRoute({children}: PrivateRouteProps): JSX.Element {
+function PrivateRoute(props: PrivateRouteProps): JSX.Element {
+  const {children, redirectTo, authStatus} = props;
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   return (
-    authorizationStatus === AuthorizationStatus.Auth
+    authorizationStatus === authStatus
       ? children
-      : <Navigate to={RoutePath.Login} />
+      : <Navigate to={redirectTo} />
   );
 }
 

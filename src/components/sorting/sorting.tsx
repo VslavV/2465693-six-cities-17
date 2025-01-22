@@ -5,7 +5,7 @@ import { setCurrentSort } from '../../store/app/app-slice';
 import { useEffect, useRef, useState, memo } from 'react';
 import { SortOption } from '../../const';
 
-function SortingTemplate ():JSX.Element {
+function Sorting ():JSX.Element {
   const [isSortingListOpen, setIsSortingListOpen] = useState(false);
   const sortingListClass = classNames('places__options places__options--custom', isSortingListOpen && 'places__options--opened');
 
@@ -67,5 +67,5 @@ function SortingTemplate ():JSX.Element {
     </form>
   );
 }
-const Sorting = memo(SortingTemplate);
-export default Sorting;
+
+export default memo(Sorting);

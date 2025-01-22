@@ -33,7 +33,7 @@ function OfferDescription({chosenOffer}:OfferDescriptionProps) {
             <h1 className="offer__name">
               {title}
             </h1>
-            <BookmarkButton isFavorite={isFavorite} pageType={'offer'}/>
+            <BookmarkButton isFavorite={isFavorite} offerId={id} pageType={'offer'}/>
           </div>
           <div className="offer__rating rating">
             <div className="offer__stars rating__stars">

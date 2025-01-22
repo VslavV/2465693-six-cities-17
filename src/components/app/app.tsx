@@ -31,8 +31,22 @@ function App(): JSX.Element {
           <Route path={RoutePath.Index}>
             <Route index element={<MainPage />} />
             <Route path={RoutePath.Offer} element={<OfferPage/>} />
-            <Route path={RoutePath.Favorites} element={<PrivateRoute><FavoritesPage /></PrivateRoute>}/>
-            <Route path={RoutePath.Login} element={<LoginPage />} />
+            <Route
+              path={RoutePath.Favorites}
+              element={
+                <PrivateRoute redirectTo={RoutePath.Login} authStatus={AuthorizationStatus.Auth}>
+                  <FavoritesPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={RoutePath.Login}
+              element={
+                <PrivateRoute redirectTo={RoutePath.Index} authStatus={AuthorizationStatus.NoAuth}>
+                  <LoginPage />
+                </PrivateRoute>
+              }
+            />
             <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
           </Route>
         </Routes>

@@ -5,7 +5,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import { ThunkType } from '../types/api.js';
+import { ChangeFavoriteStatusType, ThunkType } from '../types/api.js';
 import { OfferReview } from '../types/review.js';
 import axios from 'axios';
 import { StatusCodes } from 'http-status-codes';
@@ -61,6 +61,14 @@ export const fetchFavoritesAction = createAsyncThunk<RentalOffer[], undefined, T
   }
 );
 
+export const changeFavoriteStatusAction = createAsyncThunk<RentalOffer, ChangeFavoriteStatusType, ThunkType>(
+  'favorite/changeFavoriteStatus',
+  async ({status, offerId}, { extra: api}) => {
+    const {data} = await api.post<RentalOffer>(`${APIRoute.Favorites}/${offerId}/${status}`);
+    return data;
+  }
+);
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkType>(
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
@@ -78,6 +86,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, ThunkType>(
     try {
       const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(data.token);
+      dispatch(fetchOffersAction());
       dispatch(fetchFavoritesAction());
       return data;
     } catch (error) {
@@ -91,9 +100,10 @@ export const loginAction = createAsyncThunk<UserData, AuthData, ThunkType>(
 
 export const logoutAction = createAsyncThunk<void, undefined, ThunkType>(
   'user/logout',
-  async (_arg, {extra: api}) => {
+  async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    dispatch(fetchOffersAction());
   },
 );
 

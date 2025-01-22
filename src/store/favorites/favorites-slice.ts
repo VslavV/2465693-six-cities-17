@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { FavoritesSlice } from '../../types/state';
-import { fetchFavoritesAction } from '../api-actions';
+import { changeFavoriteStatusAction, fetchFavoritesAction } from '../api-actions';
+import { toast } from 'react-toastify';
 
 const initialState: FavoritesSlice = {
   favorites: [],
@@ -17,6 +18,23 @@ export const favoritesSlice = createSlice({
     builder
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
+      })
+      .addCase(fetchFavoritesAction.rejected, () => {
+        toast.error('Ошибка загрузки избранного');
+      })
+      .addCase(changeFavoriteStatusAction.pending, (state) => {
+        state.isFavoritesPosting = true;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        state.isFavoritesPosting = false;
+        if (action.payload.isFavorite) {
+          state.favorites.push(action.payload);
+        } else {
+          state.favorites = state.favorites.filter((offer)=> offer.id !== action.payload.id);
+        }
+      })
+      .addCase(changeFavoriteStatusAction.rejected, () => {
+        toast.error('Ошибка изменения избранного');
       });
   }
 });

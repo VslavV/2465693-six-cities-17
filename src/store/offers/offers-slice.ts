@@ -1,7 +1,9 @@
 import { NameSpace } from '../../const';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchNearbyAction, fetchOfferAction, fetchOffersAction } from '../api-actions';
+import { changeFavoriteStatusAction, fetchNearbyAction, fetchOfferAction, fetchOffersAction } from '../api-actions';
 import { OffersSlice } from '../../types/state';
+import { changeFavoriteInState } from '../../utils';
+import { toast } from 'react-toastify';
 
 const initialState: OffersSlice = {
   offers: [],
@@ -27,6 +29,7 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersLoading = false;
+        toast.error('Ошибка загрузки предложений');
       })
       .addCase(fetchOfferAction.pending, (state) => {
         state.isOfferLoading = true;
@@ -37,6 +40,7 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.isOfferLoading = false;
+        toast.error('Ошибка загрузки предложения');
       })
       .addCase(fetchNearbyAction.pending, (state) => {
         state.isNearbyLoading = true;
@@ -47,6 +51,14 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchNearbyAction.rejected, (state) => {
         state.isNearbyLoading = false;
+        toast.error('Ошибка загрузки предложений неподалёку');
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        if (state.chosenOffer && state.chosenOffer.id === action.payload.id) {
+          state.chosenOffer.isFavorite = action.payload.isFavorite;
+        }
+        state.offers = changeFavoriteInState(action.payload, state.offers);
+        state.nearPlaces = changeFavoriteInState(action.payload, state.nearPlaces);
       });
   },
 });
