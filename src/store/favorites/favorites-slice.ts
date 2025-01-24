@@ -17,7 +17,11 @@ export const favoritesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
+        state.isFavoritesLoading = false;
         state.favorites = action.payload;
+      })
+      .addCase(fetchFavoritesAction.pending, (state) => {
+        state.isFavoritesLoading = true;
       })
       .addCase(fetchFavoritesAction.rejected, () => {
         toast.error('Ошибка загрузки избранного');
