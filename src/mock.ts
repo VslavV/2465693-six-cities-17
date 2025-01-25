@@ -1,8 +1,12 @@
+import { ThunkDispatch } from '@reduxjs/toolkit';
 import { MAX_IMAGES_OFFER_COUNT, MAX_VISIBLE_REVIEW } from './const';
 import { CityOffer, HostType, LocationOffer, RentalOffer, SelectedRentalOffer } from './types/offer';
 import { OfferReview } from './types/review';
 import { UserData } from './types/user-data';
 import faker from 'faker';
+import { createAPI } from './services/api';
+import { Action } from 'redux';
+import { AppState } from './types/state';
 
 const MAX_REVIEW_RATING = 5;
 
@@ -80,3 +84,7 @@ export const mockNotFavorite = { ...makeFakeOffer(), isFavorite: false };
 export const mockReviews = new Array(MAX_VISIBLE_REVIEW).fill(null).map((_v, i) => ({ ...makeFakeReview(), id: i }));
 
 export const mockOffers = new Array(5).fill(null).map((_v, i) => ({ ...makeFakeOffer(), id: i }));
+
+export type AppThunkDispatch = ThunkDispatch<AppState, ReturnType<typeof createAPI>, Action>;
+
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
