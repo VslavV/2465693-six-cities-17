@@ -1,5 +1,5 @@
 import { ThunkDispatch } from '@reduxjs/toolkit';
-import { MAX_IMAGES_OFFER_COUNT, MAX_VISIBLE_REVIEW } from './const';
+import { AuthorizationStatus, DEFAULT_CITY, MAX_IMAGES_OFFER_COUNT, MAX_VISIBLE_REVIEW, NameSpace, SortOption } from './const';
 import { CityOffer, HostType, LocationOffer, RentalOffer, SelectedRentalOffer } from './types/offer';
 import { OfferReview } from './types/review';
 import { UserData } from './types/user-data';
@@ -7,8 +7,11 @@ import faker from 'faker';
 import { createAPI } from './services/api';
 import { Action } from 'redux';
 import { AppState } from './types/state';
+import { getRandomCity } from './utils';
 
 const MAX_REVIEW_RATING = 5;
+
+export type AppThunkDispatch = ThunkDispatch<AppState, ReturnType<typeof createAPI>, Action>;
 
 export const makeFakeLocation = (): LocationOffer => ({
   latitude: Number(faker.address.latitude()),
@@ -17,7 +20,7 @@ export const makeFakeLocation = (): LocationOffer => ({
 });
 
 export const makeFakeCity = (): CityOffer => ({
-  name: String(faker.address.cityName()),
+  name: getRandomCity(),
   location: makeFakeLocation(),
 });
 
@@ -81,10 +84,42 @@ export const mockFavorites = new Array(TEST_FAVORITES_COUNT).fill(null).map(() =
 export const mockFavorite = { ...makeFakeOffer(), isFavorite: true };
 export const mockNotFavorite = { ...makeFakeOffer(), isFavorite: false };
 
-export const mockReviews = new Array(MAX_VISIBLE_REVIEW).fill(null).map((_v, i) => ({ ...makeFakeReview(), id: i }));
+export const mockReviews = new Array(MAX_VISIBLE_REVIEW).fill(null).map((_v, i) => ({ ...makeFakeReview(), id: String(i) }));
 
-export const mockOffers = new Array(5).fill(null).map((_v, i) => ({ ...makeFakeOffer(), id: i }));
+export const mockOffers = new Array(50).fill(null).map((_v, i) => ({ ...makeFakeOffer(), id: String(i) }));
 
-export type AppThunkDispatch = ThunkDispatch<AppState, ReturnType<typeof createAPI>, Action>;
+export const mockOffer = makeFakeChoosenOffer();
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
+
+export const mockUserData = makeFakeUserData();
+
+export const makeFakeStore = (initialState?: Partial<AppState>): AppState => ({
+  [NameSpace.Auth]: {
+    authorizationStatus: AuthorizationStatus.Auth,
+    userInfo: mockUserData,
+  },
+  [NameSpace.Favorites]: {
+    favorites: mockFavorites,
+    isFavoritesLoading: false,
+    isFavoritesPosting: false,
+  },
+  [NameSpace.App]: {
+    city: DEFAULT_CITY,
+    currentSort: SortOption.Popular
+  },
+  [NameSpace.Offers]: {
+    offers: mockOffers,
+    chosenOffer: mockOffer,
+    nearPlaces: mockOffers,
+    isOffersLoading: false,
+    isOfferLoading: false,
+    isNearbyLoading: false,
+  },
+  [NameSpace.Reviews]: {
+    reviews: mockReviews,
+    isReviewsLoading: false,
+    isReviewPosting: false,
+  },
+  ...initialState ?? {},
+});
