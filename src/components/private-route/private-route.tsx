@@ -12,6 +12,7 @@ type PrivateRouteProps = {
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
   const {children, redirectTo, authStatus} = props;
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+
   return (
     authorizationStatus === authStatus
       ? children
