@@ -11,7 +11,7 @@ type OfferCardsListProps = {
   onOfferCardMouseLeaveHandler: () => void;
 };
 
-function OfferCardsListTemplate({offers, onOfferCardMouseEnterHandler, onOfferCardMouseLeaveHandler}: OfferCardsListProps): JSX.Element {
+function OfferCardsList({offers, onOfferCardMouseEnterHandler, onOfferCardMouseLeaveHandler}: OfferCardsListProps): JSX.Element {
   const currentSort = useAppSelector(selectCurrentSort);
   let sortedOfferCards: RentalOffer[] = [];
   sortedOfferCards = getSortedOfferCards(offers, currentSort);
@@ -30,5 +30,4 @@ function OfferCardsListTemplate({offers, onOfferCardMouseEnterHandler, onOfferCa
     </div>
   );
 }
-const OfferCardsList = memo(OfferCardsListTemplate);
-export default OfferCardsList;
+export default memo(OfferCardsList);

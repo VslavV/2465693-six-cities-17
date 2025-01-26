@@ -7,7 +7,7 @@ type LocationListProps = {
   activeLocation: string;
 };
 
-function LocationsListTemplate({ activeLocation }: LocationListProps): JSX.Element {
+function LocationsList({ activeLocation }: LocationListProps): JSX.Element {
 
   return (
     <div className="tabs">
@@ -21,5 +21,4 @@ function LocationsListTemplate({ activeLocation }: LocationListProps): JSX.Eleme
     </div>
   );
 }
-const LocationsList = memo(LocationsListTemplate);
-export default LocationsList;
+export default memo(LocationsList);

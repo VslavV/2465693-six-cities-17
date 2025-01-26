@@ -8,7 +8,7 @@ type CityProps = {
   isActiveCity: boolean;
 };
 
-function CityTemplate({ name, isActiveCity}: CityProps): JSX.Element {
+function City({ name, isActiveCity}: CityProps): JSX.Element {
   const dispatch = useAppDispatch();
   const linkClass = classNames('locations__item-link', 'tabs__item', { 'tabs__item--active': isActiveCity });
   const handleCityClick = useCallback((evt : MouseEvent<HTMLElement>) => {
@@ -28,5 +28,4 @@ function CityTemplate({ name, isActiveCity}: CityProps): JSX.Element {
     </li>
   );
 }
-const City = memo(CityTemplate);
-export default City;
+export default memo(City);

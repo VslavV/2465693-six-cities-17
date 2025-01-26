@@ -9,7 +9,7 @@ type CityOffersProps = {
   activeLocation: string;
 };
 
-function CityOffersTemplate({currentCityOffers, activeLocation}:CityOffersProps): JSX.Element {
+function CityOffers({currentCityOffers, activeLocation}:CityOffersProps): JSX.Element {
   const [activeOfferCardId, setActiveOfferCardId] = useState<string | null>('');
   const offerCardMouseEnterHandler = useCallback((id: string): void => {
     setActiveOfferCardId(id);
@@ -33,5 +33,4 @@ function CityOffersTemplate({currentCityOffers, activeLocation}:CityOffersProps)
     </>
   );
 }
-const CityOffers = memo(CityOffersTemplate);
-export default CityOffers;
+export default memo(CityOffers);
