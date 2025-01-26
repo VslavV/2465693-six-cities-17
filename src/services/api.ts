@@ -9,7 +9,6 @@ type MessageType = {
   message: string;
 }
 
-//статусы для тостов когда кидать оповещение , а когда нет
 const StatusCodeMapping: Record<number,boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: false,

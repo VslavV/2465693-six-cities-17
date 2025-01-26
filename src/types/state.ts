@@ -4,10 +4,8 @@ import { RentalOffer, SelectedRentalOffer } from './offer';
 import { OfferReview } from './review';
 import { UserData } from './user-data';
 
-// выводим тип хранилища
 export type AppState = ReturnType<typeof store.getState>;
 
-// для получения полной информации о типах, когда мы будем использовать dispatch
 export type AppDispatch = typeof store.dispatch;
 
 export type AppSlice = {

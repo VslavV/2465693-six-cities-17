@@ -19,7 +19,7 @@ function OfferPage(): JSX.Element {
   const chosenOffer = useAppSelector(selectChosenOffer);
 
   useEffect(() =>{
-    if (id && (!chosenOffer || chosenOffer?.id !== id)) {
+    if (id && (!chosenOffer || chosenOffer.id !== id)) {
       dispatch(fetchOfferAction(id));
     }
   },[id, chosenOffer, dispatch]);

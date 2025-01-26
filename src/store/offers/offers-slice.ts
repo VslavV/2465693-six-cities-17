@@ -40,7 +40,6 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.isOfferLoading = false;
-        toast.error('Ошибка загрузки предложения');
       })
       .addCase(fetchNearbyAction.pending, (state) => {
         state.isNearbyLoading = true;
