@@ -1,5 +1,6 @@
-import { useAppSelector } from '../../../hooks';
-import { selectReviewsPosting } from '../../../store/reviews/reviews-selector';
+import { useAppSelector } from '../../hooks';
+import { selectReviewsPosting } from '../../store/reviews/reviews-selector';
+
 
 type FormRatingType = {
   value: number;

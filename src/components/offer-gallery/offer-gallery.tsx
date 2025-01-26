@@ -6,7 +6,7 @@ type OfferGalleryProps ={
   images: string[];
 }
 
-function OfferGalleryTemplate({images}:OfferGalleryProps) {
+function OfferGallery({images}:OfferGalleryProps) {
 
   return (
     <div className="offer__gallery-container container">
@@ -16,5 +16,4 @@ function OfferGalleryTemplate({images}:OfferGalleryProps) {
     </div>
   );
 }
-const OfferGallery = memo(OfferGalleryTemplate);
-export default OfferGallery;
+export default memo(OfferGallery);

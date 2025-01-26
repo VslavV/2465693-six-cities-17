@@ -1,9 +1,9 @@
-import { selectUserInfo } from '../../../store/auth/auth-selector';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { logoutAction } from '../../../store/api-actions';
-import { RoutePath } from '../../../const';
+import { selectUserInfo } from '../../store/auth/auth-selector';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
+import { RoutePath } from '../../const';
 import { Link } from 'react-router-dom';
-import { selectFavorites } from '../../../store/favorites/favorite-selector';
+import { selectFavorites } from '../../store/favorites/favorite-selector';
 
 function HeaderNav (): JSX.Element {
   const dispatch = useAppDispatch();

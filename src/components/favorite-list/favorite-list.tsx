@@ -1,4 +1,4 @@
-import FavoriteEmpty from './favorite-empty';
+import FavoriteEmpty from '../favority-empty/favorite-empty';
 import OfferCard from '../offer-card/offer-card';
 import { memo } from 'react';
 import { RoutePath } from '../../const';
