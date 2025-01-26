@@ -1,9 +1,9 @@
 
-import HeaderLogo from './components/header-logo';
-import HeaderNav from './components/header-nav';
+import HeaderLogo from '../header-logo/header-logo';
+import HeaderNav from '../header-nav/header-nav';
 import { memo } from 'react';
 
-function HeaderTemplate ():JSX.Element {
+function Header():JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -15,5 +15,4 @@ function HeaderTemplate ():JSX.Element {
     </header>
   );
 }
-const Header = memo(HeaderTemplate);
-export default Header;
+export default memo(Header);

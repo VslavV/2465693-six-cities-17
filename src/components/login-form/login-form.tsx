@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { FormEvent, useRef } from 'react';
-import { loginAction } from '../../../../store/api-actions';
-import { RoutePath } from '../../../../const';
+import { loginAction } from '../../store/api-actions';
+import { RoutePath } from '../../const';
 
 function LoginForm(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);

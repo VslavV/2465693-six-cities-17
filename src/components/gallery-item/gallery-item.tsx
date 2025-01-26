@@ -5,7 +5,7 @@ type GalleryItemProps = {
 function GalleryItem({src}:GalleryItemProps):JSX.Element {
 
   return(
-    <div className="offer__image-wrapper">
+    <div className="offer__image-wrapper" data-testid='gallery-item-container'>
       <img
         className="offer__image"
         src={src}

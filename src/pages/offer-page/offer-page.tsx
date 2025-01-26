@@ -11,6 +11,7 @@ import { fetchOfferAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectReviewsLoading } from '../../store/reviews/reviews-selector';
 import { selectChosenOffer, selectNearByLoading, selectNearByOffers, selectOfferLoading } from '../../store/offers/offers-selector';
+import { selectFavoritesLoadingStatus } from '../../store/favorites/favorite-selector';
 
 function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,8 +29,9 @@ function OfferPage(): JSX.Element {
   const isOfferLoading = useAppSelector(selectOfferLoading);
   const isNearPlacesLoading = useAppSelector(selectNearByLoading);
   const isReviewsLoading = useAppSelector(selectReviewsLoading);
+  const isFavoritesLoading = useAppSelector(selectFavoritesLoadingStatus);
 
-  if (!chosenOffer || isOfferLoading || isNearPlacesLoading || isReviewsLoading) {
+  if (!chosenOffer || isOfferLoading || isNearPlacesLoading || isReviewsLoading || isFavoritesLoading) {
     return (
       <LoadingPage />
     );

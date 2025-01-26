@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import RandomCity from '../../components/random-city/random-city';
-import LoginForm from '../../components/header/components/login-form/login-form';
+import LoginForm from '../../components/login-form/login-form';
 
 function LoginPage(): JSX.Element {
   return (

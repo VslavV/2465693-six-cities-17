@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { FormStateType, Ratings } from '../../types/form-comment';
-import FormRating from './components/form-rating';
+import FormRating from '../form-rating/form-rating';
 import { ComentsLenght } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';

@@ -11,7 +11,7 @@ function OfferHost({host, description} :OfferHostProps):JSX.Element {
   const avatarClass = classNames('offer__avatar-wrapper', {'offer__avatar-wrapper--pro':isPro}, 'user__avatar-wrapper');
 
   return (
-    <div className="offer__host">
+    <div className="offer__host" data-testid='offer-host-container'>
       <h2 className="offer__host-title">Meet the host</h2>
       <div className="offer__host-user user">
         <div className={avatarClass}>

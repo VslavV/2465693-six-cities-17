@@ -33,6 +33,9 @@ export const authSlice = createSlice({
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.userInfo = null;
+      })
+      .addCase(logoutAction.rejected, ()=> {
+        toast.error('Ошибка выхода из аккаунта');
       });
   }
 });

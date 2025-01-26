@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RoutePath } from '../../../const';
+import { RoutePath } from '../../const';
 
 function HeaderLogo ():JSX.Element {
   return(

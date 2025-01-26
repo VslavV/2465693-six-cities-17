@@ -4,8 +4,6 @@ import OfferPage from '../../pages/offer-page/offer-page.tsx';
 import LoginPage from '../../pages/login-page/login-page.tsx';
 import MainPage from '../../pages/main-page/main-page.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
-import HistoryRouter from '../history-route/history-route.tsx';
-import browserHistory from '../../browser-history.ts';
 import LoadingPage from '../../pages/loading-page/loading-page.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { RoutePath, AuthorizationStatus } from '../../const.ts';
@@ -26,31 +24,29 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
-        <Routes>
-          <Route path={RoutePath.Index}>
-            <Route index element={<MainPage />} />
-            <Route path={RoutePath.Offer} element={<OfferPage/>} />
-            <Route
-              path={RoutePath.Favorites}
-              element={
-                <PrivateRoute redirectTo={RoutePath.Login} authStatus={AuthorizationStatus.Auth}>
-                  <FavoritesPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={RoutePath.Login}
-              element={
-                <PrivateRoute redirectTo={RoutePath.Index} authStatus={AuthorizationStatus.NoAuth}>
-                  <LoginPage />
-                </PrivateRoute>
-              }
-            />
-            <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
-          </Route>
-        </Routes>
-      </HistoryRouter>
+      <Routes>
+        <Route path={RoutePath.Index}>
+          <Route index element={<MainPage />} />
+          <Route path={RoutePath.Offer} element={<OfferPage/>} />
+          <Route
+            path={RoutePath.Favorites}
+            element={
+              <PrivateRoute redirectTo={RoutePath.Login} authStatus={AuthorizationStatus.Auth}>
+                <FavoritesPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={RoutePath.Login}
+            element={
+              <PrivateRoute redirectTo={RoutePath.Index} authStatus={AuthorizationStatus.NoAuth}>
+                <LoginPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
+        </Route>
+      </Routes>
     </HelmetProvider>
   );
 }

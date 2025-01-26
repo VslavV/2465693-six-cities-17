@@ -2,18 +2,18 @@ export type LocationOffer = {
   latitude: number;
   longitude: number;
   zoom: number;
-}
+};
 
-export type CityOffer ={
+export type CityOffer = {
   name: string;
   location: LocationOffer;
-}
+};
 
 export type HostType = {
   isPro: boolean;
   name: string;
   avatarUrl: string;
-}
+};
 
 export type RentalOffer = {
   id: string;
